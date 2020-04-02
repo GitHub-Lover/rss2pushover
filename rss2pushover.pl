@@ -15,9 +15,6 @@ use XML::Simple;
 use Digest::MD5 qw(md5_hex);
 use Encode qw(encode_utf8);
 use DBI;
-use FindBin qw($Bin);
-use lib "$Bin/lib/";
-use Mail;
 
 
 my $help;
@@ -89,9 +86,10 @@ while (my $ref = $sth->fetchrow_hashref()) {
 
 		foreach my $item (@{$xml->{channel}->{item}}) {
 			my $title = $item->{title};
+			my $pubdate = $item->{pubDate};
 			my $link = $item->{link};
 			my $description = $item->{description};
-			my $md5title = md5_hex(encode_utf8($title));
+			my $md5title = md5_hex(encode_utf8($pubdate.$title));
 
 			my $sth = $dbh->prepare("SELECT id FROM data WHERE md5title = ? AND channel = ?");
 			$sth->execute($md5title,$channelid);
