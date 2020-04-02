@@ -10,6 +10,11 @@ Features
 * parsing rss feed and push new article
 * database for article and channel managment
 
+Perl packages
+-------
+
+libwww-perl libtypes-datetime-perl libxml-simple-perl libdbi-perl libdbd-sqlite3-perl
+
 Usage Example
 -------
 
